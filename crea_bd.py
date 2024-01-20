@@ -3,20 +3,25 @@
 
 import psycopg2
 
-#Este espacio lo cree para que puedan crear su tabla en PgAdmin4 
-hosts = input ("Introdusca el host " )
-databas = input ("Introdusca su nombre de database ") 
-usuario = input ("Introdusca su usuario ")
-contraceña = input ("Introdusca su usuario ")
-con = psycopg2.connect(host= hosts,
-                    database =databas,
-                    user =usuario,
-                    password= contraceña)
+#Este espacio lo cree para que puedan crear su tabla en PgAdmin4  marcelo
+
+# hosts = input ("Introdusca el host " )
+# databas = input ("Introdusca su nombre de database ") 
+# usuario = input ("Introdusca su usuario ")
+# contraceña = input ("Introdusca su usuario ")
+# con = psycopg2.connect(host= hosts,
+#                     database =databas,
+#                     user =usuario,
+#                     password= contraceña)
+con = psycopg2.connect(host= "localHost",
+                    database ="data",
+                    user ="postgres",
+                    password= "Bartousai2020")
 cur= cur = con.cursor()
 
 
 
-comando = """CREATE TABLE usuario (id serial PRIMARY KEY, 
+comando = """CREATE TABLE IF NOT EXISTS usuario (id serial PRIMARY KEY, 
     email VARCHAR(50),
     password VARCHAR(50),
     sexo VARCHAR(8))"""
