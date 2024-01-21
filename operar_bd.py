@@ -9,10 +9,6 @@ con = psycopg2.connect(host= "localHost",
                     password= "Bartousai2020")
 cur=con.cursor()
 
-def comprobar_contraceña(email, contraceña):
-    pass
-
-
 def carga_bd (email, contraceña, sexo):
 
 
@@ -67,14 +63,7 @@ def comprobar_contraceña(email, contraceña):
             print ("No es la contraceña correcta")
     except:
         print( "es Incorrecta la contraceña")
-        cur.close()
-        con.close()
-
-
-    print("opa q paso aqui")
- 
-
-
+        
 
 
     
