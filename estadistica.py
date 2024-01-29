@@ -9,7 +9,7 @@ def mostrar_estadisticas():
     con = psycopg2.connect(host= "localHost",
                         database ="data",
                         user ="postgres",
-                        password= "Bartousai2020")
+                        password= "")
     
 
     sql = pd.read_sql_query("SELECT * FROM usuario", con)
