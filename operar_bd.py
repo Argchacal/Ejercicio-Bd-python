@@ -1,28 +1,38 @@
 #Aqui voy a trabajar la base de dato carga y extraccion de datos
-
+#Para operar la base de datos debe indicar la password de su base de datos  
 import psycopg2
 
 
-con = psycopg2.connect(host= "localHost",
+def carga_bd (email, contraceña, sexo):
+    try:
+        con = psycopg2.connect(host= "localHost",
                     database ="data",
                     user ="postgres",
-                    password= "Bartousai2020")
-cur=con.cursor()
+                    password= "")
+        cur=con.cursor()
 
-def carga_bd (email, contraceña, sexo):
+        comando = """INSERT INTO usuario (email, password, sexo) VALUES (%s, %s, %s)"""
+        datos = (email,contraceña, sexo)
+        cur.execute(comando,datos)
+        con.commit()
+        print("Cuenta nueva creada")
 
-
-    comando = """INSERT INTO usuario (email, password, sexo) VALUES (%s, %s, %s)"""
-    datos = (email,contraceña, sexo)
-    cur.execute(comando,datos)
-    con.commit()
     
-    print("Cuenta nueva creada")
-    cur.close()
-    con.close()
+    
+    finally:
+        cur.close()
+        con.close()
 
+
+#Comprueva que la el email este en la base de datos
 def comprobar_email (correo):
     try:
+        con = psycopg2.connect(host= "localHost",
+                    database ="data",
+                    user ="postgres",
+                    password= "")
+        cur=con.cursor()
+        
         comando = "SELECT email,password,sexo FROM usuario WHERE email = %s;"
         
         cur.execute(comando,(correo,))
@@ -30,39 +40,46 @@ def comprobar_email (correo):
         datos =cur.fetchall()
         
         datos2 = datos[0]
+        
+
         if datos2[0] == correo:
-            print("email comprobado", datos2[0])
-            
             return True
     except:
-        print( correo, "No se encuentra en la base de datos")
+        return False
+    finally:
         cur.close()
         con.close()
-        return False
- 
+
+#Comprueva que la contraceña coincida con la de la base de datos del email ingresado
+
+def comprobar_contraseña(email):
+    con = psycopg2.connect(host= "localHost",
+                    database ="data",
+                    user ="postgres",
+                    password= "")
+    cur=con.cursor()
+    
 
 
-def comprobar_contraceña(email, contraceña):
-    print ("email", email, "contraceña", contraceña)
     try:
+        contraseña = input("Ingrese la contraceña ")
         comando = "SELECT email,password,sexo FROM usuario WHERE email = %s;"
-        
         cur.execute(comando,(email,))
         con.commit()
-
-
         datos =cur.fetchall()
+        datos2= datos[0]
+        if datos2 [1] == contraseña:
+            return True
+        else:
+            opcion = input("No es la contraseña correcta, ingrese 1 para intentarlo nuevamente")
+            if opcion == "1":
+
+                comprobar_contraseña(email)
+            return False
+    finally:
         cur.close()
         con.close()
-        datos2= datos[0]
-        print ("datos", datos2)
-        if datos2 [1] == contraceña:
-            print ("Usuario aceptado")
-
-        else:
-            print ("No es la contraceña correcta")
-    except:
-        print( "es Incorrecta la contraceña")
+ 
         
 
 
