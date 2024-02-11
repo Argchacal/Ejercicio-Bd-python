@@ -8,3 +8,9 @@ contrario se le informará el error. La opción de crear cuenta cargará los dat
 guardará en una base de datos.
 Por último, programar una función que muestre un gráfico torta que represente el
 porcentaje de usuarios segun su sexo.
+
+Tecnologias Utilizadas:
+    pgAdmin4
+    PostgreSQL
+    Pandas 
+    Matplotlib
