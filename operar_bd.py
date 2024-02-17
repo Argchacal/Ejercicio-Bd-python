@@ -28,9 +28,10 @@ def carga_bd (email, contraceña, sexo):
 def comprobar_email (correo):
     try:
         con = psycopg2.connect(host= "localHost",
-                    database ="data",
+                    database ="data",#la base de dato debe estar creada en pgAdmin4
                     user ="postgres",
-                    password= "")
+                    password= "")#Recuerde que debe ingresar entre las comillas la contraceña de su base de datos
+    
         cur=con.cursor()
         
         comando = "SELECT email,password,sexo FROM usuario WHERE email = %s;"

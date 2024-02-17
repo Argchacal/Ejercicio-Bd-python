@@ -9,7 +9,7 @@ import psycopg2
 contraseña = input ("Introdusca su usuario de su BD")
 
 con = psycopg2.connect(host= "localHost",
-                    database ="data",
+                    database ="data",#la base de dato debe estar creada en pgAdmin4
                     user ="postgres",
                     password= contraseña)
 cur = con.cursor()

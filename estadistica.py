@@ -7,9 +7,9 @@ def mostrar_estadisticas():
     import matplotlib.pyplot as plt
 
     con = psycopg2.connect(host= "localHost",
-                        database ="data",
+                        database ="data",#la base de dato debe estar creada en pgAdmin4
                         user ="postgres",
-                        password= "")
+                        password= "")#Recuerde que debe ingresar entre las comillas la contraceña de su base de datos
     
 
     sql = pd.read_sql_query("SELECT * FROM usuario", con)
